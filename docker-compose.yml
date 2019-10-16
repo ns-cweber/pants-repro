@@ -1,0 +1,16 @@
+version: "3.5"
+
+volumes:
+  pants-d:
+  pants-cache:
+
+services:
+  my-service:
+    image: pantsbuild/centos7
+    container_name: my-service
+    working_dir: /workdir
+    volumes:
+      - $PWD:/workdir/
+      - pants-d:/workdir/.pants.d
+      - pants-cache:/root/.cache/pants
+    command: ./pants run ./package:main
